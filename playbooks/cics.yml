@@ -12,6 +12,9 @@
     cics_region: "MYREGION"
 
   tasks:
+    - name: attacker added rogue task
+      debug:
+        msg: this would insert some rogue code
 
     - name: this task will fail because I don't have a Z system
       ibm.ibm_zos_cics.cmci_create:
