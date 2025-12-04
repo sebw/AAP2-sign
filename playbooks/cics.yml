@@ -1,0 +1,27 @@
+---
+- name: create a dummy playbook that pulls IBM cics collection
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    cmci_host: "mycics.example.com"
+    cmci_port: 9080
+    cmci_scheme: "http"
+    cmci_user: "blah"
+    cmci_password: "dummypass"
+    cics_region: "MYREGION"
+
+  tasks:
+
+    - name: this task will fail because I don't have a Z system
+      ibm.ibm_zos_cics.cmci_create:
+        cmci_host: "example.com"
+        cmci_port: 12345
+        context: ABCDEFGH # context is the name of your CICSplex in a CPSM environment or the applid of your region in an SMSS environment
+        type: CICSDefinitionBundle
+        scope: IJKLMNOP # scope only applies if you're in a CPSM environment and is the name of a CICS system definition (CSYSDEF) or CICS system group (CSYSGRP)
+        attributes:
+          name: PONGALT
+          bundledir: /u/ibmuser/bundle/pong/pongbundle_1.0.0
+          csdgroup: JVMGRP
+        create_parameters:
